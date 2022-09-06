@@ -1,3 +1,4 @@
+{% if cookiecutter.deployment_via_github_actions == 'y' %}
 # This workflows will upload a Python Package using Twine when a release is created
 # For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
 
@@ -29,3 +30,4 @@ jobs:
           pwd
           python setup.py sdist bdist_wheel
           twine upload dist/*
+{% endif %}
