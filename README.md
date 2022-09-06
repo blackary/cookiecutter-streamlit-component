@@ -7,6 +7,9 @@ Make sure you have cruft installed (you can use [pipx](https://pypa.github.io/pi
 pipx install cruft
 ```
 
+Then run
 ```
 cruft create https://github.com/blackary/cookiecutter-streamlit-component/
 ```
+
+And follow the instructions
