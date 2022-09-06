@@ -1,0 +1,3 @@
+recursive-include src/{{ cookiecutter.import_name}}/frontend *
+include README.md
+include LICENSE
