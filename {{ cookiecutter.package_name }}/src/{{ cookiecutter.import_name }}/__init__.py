@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 # Tell streamlit that there is a component called {{ cookiecutter.import_name }},
 # and that the code to display that component is in the "frontend" folder
 _component_func = components.declare_component(
-	"{{ cookiecutter.import_name }}", path="frontend")
+	"{{ cookiecutter.import_name }}", path="frontend"
 )
 
 # Create the python function that will be called
