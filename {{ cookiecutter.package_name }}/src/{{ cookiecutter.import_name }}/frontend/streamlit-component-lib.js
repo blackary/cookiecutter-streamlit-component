@@ -1,3 +1,38 @@
+{% if cookiecutter.working_with_dataframes == 'n' %}
+// Borrowed minimalistic Streamlit API from Thiago
+// https://discuss.streamlit.io/t/code-snippet-create-components-without-any-frontend-tooling-no-react-babel-webpack-etc/13064
+function sendMessageToStreamlitClient(type, data) {
+  console.log(type, data)
+  const outData = Object.assign({
+      isStreamlitMessage: true,
+      type: type,
+  }, data);
+  window.parent.postMessage(outData, "*");
+}
+
+const Streamlit = {
+  setComponentReady: function() {
+      sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
+  },
+  setFrameHeight: function(height) {
+      sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
+  },
+  setComponentValue: function(value) {
+      sendMessageToStreamlitClient("streamlit:setComponentValue", {value: value});
+  },
+  RENDER_EVENT: "streamlit:render",
+  events: {
+      addEventListener: function(type, callback) {
+          window.addEventListener("message", function(event) {
+              if (event.data.type === type) {
+                  event.detail = event.data
+                  callback(event);
+              }
+          });
+      }
+  }
+}
+{% else %}
 (function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))n(s);new MutationObserver(s=>{for(const a of s)if(a.type==="childList")for(const i of a.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&n(i)}).observe(document,{childList:!0,subtree:!0});function r(s){const a={};return s.integrity&&(a.integrity=s.integrity),s.referrerpolicy&&(a.referrerPolicy=s.referrerpolicy),s.crossorigin==="use-credentials"?a.credentials="include":s.crossorigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function n(s){if(s.ep)return;s.ep=!0;const a=r(s);fetch(s.href,a)}})();function jo(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var Fs={exports:{}},R={};/** @license React v16.13.1
  * react-is.production.min.js
  *
@@ -81,3 +116,4 @@ return true;`)}function Iu(e){return typeof e!="bigint"?Ee(e):tn?`${Ee(e)}n`:`"$
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */var Id=globalThis&&globalThis.__extends||function(){var e=function(t,r){return e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(n,s){n.__proto__=s}||function(n,s){for(var a in s)s.hasOwnProperty(a)&&(n[a]=s[a])},e(t,r)};return function(t,r){e(t,r);function n(){this.constructor=t}t.prototype=r===null?Object.create(r):(n.prototype=r.prototype,new n)}}();(function(e){Id(t,e);function t(){return e!==null&&e.apply(this,arguments)||this}return t.prototype.componentDidMount=function(){Pn.setFrameHeight()},t.prototype.componentDidUpdate=function(){Pn.setFrameHeight()},t})(pc.PureComponent);Streamlit=Pn;
+ {% endif %}

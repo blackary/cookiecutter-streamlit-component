@@ -6,6 +6,7 @@
   "import_name": "{{ cookiecutter.package_name.lower().replace('-', '_') }}",
   "description": "Streamlit component that allows you do X",
   "deployment_via_github_actions": "y",
+  "working_with_dataframes": "n",
   "open_source_license": [
     "MIT license",
     "BSD license",
